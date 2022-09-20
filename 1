@@ -1,3 +1,5 @@
+_G.PRED = 0.00143
+
 local Aiming = loadstring(game:HttpGet("https://raw.githubusercontent.com/hharu02/121323123123131231231231/main/fart"))()
 Aiming.TeamCheck(false)
 
@@ -58,3 +60,18 @@ RunService:BindToRenderStep("AimLock", 0, function()
         CurrentCamera.CFrame = CFrame.lookAt(CurrentCamera.CFrame.Position, Hit.Position)
     end
     end)
+
+local ping 
+local Value 
+local pingValue 
+local PingNumber 
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    
+     ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+     Value = tostring(ping)
+     pingValue = Value:split(" ")
+     PingNumber = pingValue[1]
+    
+     DaHoodSettings.Prediction = PingNumber / 95000 + _G.PRED
+end)
